@@ -119,3 +119,9 @@ function previusFunction(){
 }
 
 let cicles= setInterval(nextFunction,3000);
+
+items.addEventListener('click', stopInterval)
+
+function stopInterval () {
+    clearInterval(cicles);
+}

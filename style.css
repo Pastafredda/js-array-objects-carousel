@@ -30,6 +30,7 @@
     height: 100%;
     display: none;
     position: relative;
+    cursor: pointer;
 }
 
 .item img{
