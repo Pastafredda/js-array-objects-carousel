@@ -30,13 +30,21 @@ const images = [
     }
 ];
 
+// Settiamo le costanti
 const items= document.getElementById("items");
 const previus= document.getElementById("previus");
 const next= document.getElementById("next");
 const thumbnail= document.getElementById("thumbnail");
 
+// Con il ciclo forEach andiamo a prendere gli elementi negli oggetti
 images.forEach((element)=>{
-    const item =`<div class= "item"><img src="${element.image}" alt="image"></div>`
+    const item =`<div class= "item">
+                    <img src="${element.image}" alt="image">
+                    <h4>${element.title}</h4>
+                    <span>${element.text}</span>
+                </div>`
+                
+                
     items.innerHTML += item;
 
     const thumb = `<div class="thumb opacity"><img src="${element.image}" alt="image"></div>`;
@@ -45,5 +53,66 @@ images.forEach((element)=>{
 
 let firstImage= 0;
 
+// Selezioniamo gli elementi creati
 const containerItems = document.querySelectorAll("#items .item");
 containerItems[firstImage].classList.add('active');
+
+// Selezioniamo anche per la thumbnail
+const opacity= document.querySelectorAll(".thumb")
+opacity[firstImage].classList.remove('opacity');
+
+// Facciamo funzionare le frecce
+next.addEventListener('click', nextFunction)
+
+function nextFunction(){
+
+    // Rimuoviamo la classe active alla prima immagine
+    containerItems[firstImage].classList.remove('active');
+
+    // Aggiungiamo la classe opacity alla prima immagine di thumbnail
+    opacity[firstImage].classList.add('opacity');
+
+
+    // Passiamo all'item successivo
+    firstImage++;
+
+    // Quando la classe active arriverà all'ultimo elemento
+    if(firstImage == images.length){
+
+        // Gli diciamo di tornare a 0 per creare il loop
+        firstImage = 0;
+    }
+
+    // Aggiungiamo active all'item successivo
+    containerItems[firstImage].classList.add('active');
+    // Leviamo l'opacità all'item successivo
+    opacity[firstImage].classList.remove('opacity');
+  
+}
+
+previus.addEventListener('click', previusFunction)
+
+function previusFunction(){
+    
+    // Rimuoviamo la classe active alla prima immagine
+    containerItems[firstImage].classList.remove('active');
+
+    // Aggiungiamo la classe opacity alla prima immagine di thumbnail
+    opacity[firstImage].classList.add('opacity');
+
+    // Diciamo di farlo per le precedenti in questo caso
+    firstImage--;
+
+    // Quando la classe active arriverà al primo elemento
+    if(firstImage < 0){
+
+        // Gli diciamo tornare all'ultima immagine
+        firstImage = images.length -1;
+    }
+
+     // La riaggiungiamo per creare il loop
+    containerItems[firstImage].classList.add('active');
+
+     // La leviamo sempre per il loop
+     opacity[firstImage].classList.remove('opacity');
+}
