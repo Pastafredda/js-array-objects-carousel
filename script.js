@@ -40,10 +40,11 @@ const thumbnail= document.getElementById("thumbnail");
 images.forEach((element)=>{
     const item =`<div class= "item">
                     <img src="${element.image}" alt="image">
-                    <h4>${element.title}</h4>
-                    <span>${element.text}</span>
+                    <div class="info">
+                        <h4>${element.title}</h4>
+                        <span>${element.text}</span>
+                    </div>
                 </div>`
-                
                 
     items.innerHTML += item;
 
@@ -116,3 +117,5 @@ function previusFunction(){
      // La leviamo sempre per il loop
      opacity[firstImage].classList.remove('opacity');
 }
+
+let cicles= setInterval(nextFunction,3000);
